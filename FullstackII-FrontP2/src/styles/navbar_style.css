@@ -1,0 +1,717 @@
+/* Estilos generales */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+/* navbar en scroll */
+#navbar.scrolled {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* logo más pequeño */
+#navbar.scrolled .logo {
+  height: 50px; /* 👈 más chico que el normal */
+  transition: height 0.3s ease, padding 0.3s ease;
+}
+
+/* links en blanco cuando hay scroll */
+#navbar.scrolled .nav-menu li a {
+  color: #fff !important;
+}
+
+/* opcional: cambia el color del ícono del menú hamburguesa */
+#navbar.scrolled .hamburger span {
+  background: #fff;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, height 0.3s ease; /* Transición de fondo, sombra y altura */
+}
+
+h1 {
+  color: #122c34;
+}
+
+nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  background-color: transparent;
+  transition: background-color 0.15s ease, height 0.15s ease;
+}
+
+nav.solid {
+  background-color: #122c34; /* Fondo sólido cuando se hace scroll */
+  color: white;
+  height: 60px; /* Más pequeño cuando se vuelve sólido */
+}
+
+nav ul {
+  margin: 0 auto; /* Centra el menú horizontalmente */
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  transition: color 0.3s ease; /* Transición para los enlaces */
+  max-width: 90vw;
+  overflow-x: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+nav ul li a {
+  color: #122c34; /* Color inicial de los enlaces */
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease; /* Transición para el color del texto */
+}
+
+nav ul li a:hover {
+  color: #8f95d3; /* Color al pasar el mouse */
+}
+
+/* Que el main tenga espacio para el navbar y el footer */
+.content {
+  margin-top: 120px;
+  padding: 40px 20px 80px;
+}
+/* Grid de productos */
+.spacer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+
+/* Estilos para la navbar sólida */
+nav.solid ul li a {
+  color: white; /* Cambia el color de los enlaces cuando la navbar es sólida */
+}
+
+nav.solid ul li a:hover {
+  color: #8f95d3; /* Color al pasar el mouse */
+}
+
+.logo {
+  position: absolute;
+  left: 500px; /* Separación desde el borde izquierdo */
+  height: 70px;
+  transition: height 0.3s ease;
+}
+
+.search-bar {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.search-bar input {
+  padding: 10px 200px;
+  border: 1px solid #ccc;
+  border-radius: 20px 0 0 20px;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-left: none;
+  background: #8f95d3;
+  color: white;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+}
+
+nav.solid .search-bar {
+  display: none;
+}
+
+nav.solid .logo {
+  height: 50px; /* Reduce el tamaño del logo cuando la navbar es sólida */
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin: 120px auto 40px auto;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1; /* base */
+}
+
+.carousel-images {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1; /* capa base */
+}
+
+.carousel-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.carousel-images img.active {
+  opacity: 1;
+  position: absolute; /* 👈 no uses relative aquí */
+  z-index: 1;
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(18, 44, 52, 0.6);
+  color: #fff;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999999; /* 👈 SIEMPRE por encima */
+}
+
+.carousel-btn:hover {
+  background: rgba(18, 44, 52, 0.9);
+}
+
+.carousel-btn.next {
+  right: 80px; /* 👈 20px separado del borde derecho */
+}
+.carousel-btn.prev {
+  left: 20px; /* 👈 20px separado del borde izquierdo */
+}
+
+/* Tarjeta de producto */
+.card {
+  width: 260px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Imagen con tamaño fijo para que no rompa el layout */
+.card-img {
+  width: 100%;
+  height: 260px;      /* mismo alto para todos */
+  object-fit: cover;  /* o "contain" si quieres ver la imagen completa */
+  border-radius: 8px;
+}
+
+.card h4 {
+  margin: 0.5rem 0;
+  color: black;
+  cursor: pointer;
+}
+.card p {
+  margin: 0.5rem 0;
+  color: black;
+}
+
+.card .boton {
+  margin-top: auto; /* Empuja el botón al fondo */
+}
+
+.boton {
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5rem;
+  border-style: solid;
+  padding: 14px 28px;
+  background-color: #122c34;
+  color: white;
+  border-color: #122c34;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #8f95d3;
+  border-color: #8f95d3;
+  transform: scale(1.1);
+}
+
+.titulos {
+  margin-top: 50px;
+  color: #122c34;
+}
+
+.separador {
+  margin-top: 50px;
+  border: 2px solid #122c34;
+  width: 90%;
+  opacity: 0.5;
+}
+
+.oferta {
+  color: red;
+}
+
+.card-img {
+  transition: opacity 0.4s ease;
+}
+.card-img.fade {
+  opacity: 0.2;
+}
+
+.footer {
+  background-color: #122c34;
+  color: white;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  gap: 40px;
+  background-color: #122c34;
+  padding: 20px 0;
+}
+
+.footer-links,
+.footer {
+  flex: 1;
+  background: none;
+  color: white;
+  padding: 0 300px;
+  margin: 0;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul :hover {
+  color: #8f95d3;
+}
+
+.footer-logo {
+  flex: 0 0 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-logo img {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+  background: none;
+}
+
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer-links,
+  .footer {
+    padding: 0;
+    text-align: center;
+  }
+  .footer-logo {
+    margin: 10px 0;
+  }
+}
+
+/* Limita el ancho del menú y evita desbordes */
+nav ul {
+  max-width: 90vw;
+  overflow-x: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Corrige el color de los enlaces cuando la navbar es sólida */
+#navbar.solid ul li a {
+  color: white !important;
+}
+
+#navbar.solid ul li a:hover {
+  color: #8f95d3 !important;
+}
+
+/* Limita el ancho del menú y ajusta el espaciado */
+.nav-menu {
+  max-width: 95vw;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 0 10px;
+}
+
+/* Estilos para el botón hamburguesa alineado a la derecha */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  position: absolute;
+  right: 30px;
+  top: 150%;
+  transform: translateY(-50%);
+}
+.hamburger span {
+  height: 4px;
+  width: 100%;
+  background: #122c34;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+.hamburger.active span {
+  background: #8f95d3;
+}
+
+a {
+  text-decoration: none; /* Quita el subrayado */
+  color: inherit; /* Hereda el color del texto de su contenedor */
+}
+
+.producto img {
+  width: 700px;
+  height: auto;
+  margin-left: 150px;
+  margin-top: 250px;
+}
+
+.info {
+  margin-left: 1150px;
+  margin-top: -700px;
+  text-align: left;
+  max-width: 700px;
+  padding-bottom: 400px;
+}
+
+.info h3 {
+  color: #122c34;
+  font-size: 30px;
+}
+
+.info button {
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5rem;
+  border-style: solid;
+  padding: 14px 28px;
+  background-color: #122c34;
+  color: white;
+  border-color: #122c34;
+  font-size: 15px;
+}
+
+.info button:hover {
+  background-color: #8f95d3;
+  border-color: #8f95d3;
+  transform: scale(1.1);
+}
+
+/* Oculta el menú en pantallas pequeñas y lo muestra con el botón */
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70vw;
+    height: 100vh;
+    background: #122c34;
+    padding: 60px 0 0 0;
+    z-index: 1000;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
+    /* Oculta el menú por defecto */
+    align-items: flex-start;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.18, 1);
+  }
+  .nav-menu.active {
+    transform: translateX(0);
+  }
+  .nav-menu li {
+    width: 100%;
+  }
+  .nav-menu li a {
+    color: white;
+    font-size: 18px;
+    padding: 16px 24px;
+    border-bottom: 1px solid #8f95d3;
+    width: 100%;
+    display: block;
+    text-align: left;
+  }
+  .nav-menu li a:hover {
+    color: #8f95d3;
+    background: none;
+  }
+}
+
+/* Ajusta el tamaño de fuente en pantallas pequeñas */
+@media (max-width: 900px) {
+  .nav-menu li a {
+    font-size: 16px;
+    word-break: break-word;
+    text-align: center;
+  }
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1200px) {
+  .spacer {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    height: auto;
+  }
+  .card {
+    min-width: 260px;
+    max-width: 350px;
+    margin: 10px;
+    flex: 1 1 40%;
+  }
+  .logo {
+    position: relative; /* en vez de absolute */
+    left: 0; /* pegado a la izquierda */
+    margin-left: 20px; /* espacio pequeño */
+    height: 60px; /* más pequeño en general */
+  }
+
+  .search-bar input {
+    padding: 10px 80px;
+  }
+  footer ul {
+    margin-left: 0;
+    text-align: center;
+  }
+  footer h3 {
+    text-align: center;
+    margin-right: 0;
+  }
+  .carousel-images img {
+    width: 100vw;
+    height: 20rem;
+  }
+}
+
+@media (max-width: 900px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 10px 0;
+  }
+  .logo {
+    margin-bottom: 10px;
+    margin-top: 35px;
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+  }
+  .search-bar {
+    position: fixed;
+    margin-bottom: 10px;
+    width: 90vw;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nav-menu {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+  }
+  .spacer {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    margin-top: 40px;
+  }
+  .card {
+    width: 90vw;
+    min-width: 200px;
+    max-width: 400px;
+  }
+  .carousel-images img {
+    width: 100vw;
+    height: 15rem;
+  }
+  .titulos {
+    font-size: 1.5rem;
+  }
+  .separador {
+    width: 98%;
+  }
+  footer ul {
+    margin-left: 0;
+    text-align: center;
+  }
+  footer h3 {
+    text-align: center;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+  }
+  .logo {
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  .search-bar {
+    padding-right: 40px;
+  }
+  .search-bar input {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  .carousel-images img {
+    width: 100vw;
+    height: 10rem;
+  }
+  .card {
+    width: 98vw;
+    min-width: 150px;
+    max-width: 350px;
+    padding: 0.5rem;
+  }
+  .titulos {
+    font-size: 1.2rem;
+  }
+  .separador {
+    width: 100%;
+  }
+  footer {
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+}
+
+/* --- RESPONSIVE PRODUCTO --- */
+@media (max-width: 1200px) {
+  .producto img {
+    width: 400px;
+    margin-left: 0;
+    margin-top: 120px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .info {
+    margin-left: 0;
+    margin-top: 30px;
+    max-width: 90vw;
+    padding-bottom: 100px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 120px;
+  }
+  .producto img {
+    width: 90vw;
+    max-width: 350px;
+    margin: 0 auto 20px auto;
+    margin-top: 0;
+  }
+  .info {
+    margin-left: 0;
+    margin-top: 0;
+    max-width: 95vw;
+    padding-bottom: 40px;
+    text-align: center;
+  }
+  .info h1 {
+    font-size: 1.5rem;
+  }
+  .info h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .producto img {
+    width: 98vw;
+    max-width: 250px;
+  }
+  .info {
+    padding-bottom: 20px;
+  }
+  .info h1 {
+    font-size: 1.1rem;
+  }
+  .info h3 {
+    font-size: 1rem;
+  }
+  /* Hamburger cuando hay scroll */
+  .hamburger.scrolled {
+    top: 35px; /* se alinea con navbar chica */
+    color: white;
+  }
+  .hamburger.scrolled span {
+    background: #fff; /* 👈 ahora blanco */
+  }
+}

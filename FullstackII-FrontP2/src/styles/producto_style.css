@@ -1,0 +1,17 @@
+button {
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5rem;
+  border-style: solid;
+  padding: 14px 28px;
+  background-color: #122c34;
+  color: white;
+  border-color: #122c34;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #8f95d3;
+  border-color: #8f95d3;
+  transform: scale(1.1);
+}

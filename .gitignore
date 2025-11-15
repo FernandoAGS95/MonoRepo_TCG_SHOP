@@ -1,0 +1,10 @@
+# Ignorar node_modules de cualquier proyecto
+**/node_modules/
+
+# (Opcional) otras cosas típicas de frontend
+**/dist/
+**/.vite/
+**/coverage/
+
+# (Opcional) Java (backend)
+tcg-backend/target/
