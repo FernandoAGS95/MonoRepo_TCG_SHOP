@@ -70,6 +70,7 @@ export default function Home() {
   const [banners, setBanners] = useState<Banner[]>([]);
   const [loadingProductos, setLoadingProductos] = useState(true);
   const [errorProductos, setErrorProductos] = useState<string | null>(null);
+  console.log("Deploy test front");
 
   // rotación automática del carrusel
   useEffect(() => {

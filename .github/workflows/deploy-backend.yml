@@ -1,0 +1,29 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "tcg-backend/**"
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo (not used but required)
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 BACKEND
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.BACK_HOST }}
+          username: ${{ secrets.BACK_USER }}
+          key: ${{ secrets.BACK_SSH_KEY }}
+          script: |
+            echo "[BACKEND] 🚀 Iniciando deploy backend"
+            cd MonoRepo_TCG_SHOP
+            git pull origin main
+            docker compose -f docker-compose.backend.yml up -d --build
+            docker system prune -f
+            echo "[BACKEND] ✅ Deploy backend completado"

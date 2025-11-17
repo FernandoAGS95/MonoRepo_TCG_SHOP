@@ -1,0 +1,29 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "FullstackII-FrontP2/**"
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo (not used but required)
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 FRONT
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.FRONT_HOST }}
+          username: ${{ secrets.FRONT_USER }}
+          key: ${{ secrets.FRONT_SSH_KEY }}
+          script: |
+            echo "[FRONT] 🚀 Iniciando deploy frontend"
+            cd MonoRepo_TCG_SHOP
+            git pull origin main
+            docker compose -f docker-compose.frontend.yml up -d --build
+            docker system prune -f
+            echo "[FRONT] ✅ Deploy frontend completado"
