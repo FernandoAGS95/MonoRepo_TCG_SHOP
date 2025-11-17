@@ -28,6 +28,7 @@ public class ProductController {
 
     @GetMapping
     public List<Product> getAll() {
+        System.out.println("Test deploy backend 17 11 2025 ");
         return service.findAll();
     }
 
