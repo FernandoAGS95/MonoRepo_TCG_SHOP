@@ -11,7 +11,7 @@ services:
       - "8080:8080"
     environment:
       # IMPORTANTE: aquí luego cambiaremos <DB_PRIVATE_IP> por la IP privada real de la EC2 de DB
-      SPRING_DATASOURCE_URL: "jdbc:mysql://<DB_PRIVATE_IP>:3306/tcgshop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://172.31.24.157:3306/tcgshop?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
       SPRING_DATASOURCE_USERNAME: "tcguser"
       SPRING_DATASOURCE_PASSWORD: "TcgPass123!"
       SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
