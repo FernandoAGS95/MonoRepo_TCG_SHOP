@@ -1,12 +1,18 @@
+// src/components/Navbar.tsx
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import authService from "../services/AuthService";
 import "../styles/navbar_style.css";
 
 export default function Navbar() {
   const { count } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => {
@@ -15,6 +21,31 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const isAuth = authService.isAuthenticated();
+      setIsAuthenticated(isAuth);
+
+      if (isAuth) {
+        const userData = authService.getUserData();
+        if (userData) {
+          setUserName(userData.nombreCompleto);
+        }
+      } else {
+        setUserName("");
+      }
+    };
+
+    checkAuth();
+  }, [location]);
+
+  const handleLogout = () => {
+    authService.logout();
+    setIsAuthenticated(false);
+    setUserName("");
+    navigate("/");
+  };
 
   return (
     <header>
@@ -55,9 +86,34 @@ export default function Navbar() {
           <li>
             <NavLink to="/contacto">Contacto</NavLink>
           </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
+
+          {isAuthenticated ? (
+            <>
+              <li>
+                <span className={`user-name ${scrolled ? "scrolled" : ""}`}>
+                  👤 {userName}
+                </span>
+              </li>
+              {authService.isAdmin() && (
+                <li>
+                  <NavLink to="/admin">Admin</NavLink>
+                </li>
+              )}
+              <li>
+                <button
+                  className={`logout-button ${scrolled ? "scrolled" : ""}`}
+                  onClick={handleLogout}
+                >
+                  Cerrar Sesión
+                </button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <NavLink to="/login">Login</NavLink>
+            </li>
+          )}
+
           <li>
             <NavLink to="/carrito">
               Carrito{" "}

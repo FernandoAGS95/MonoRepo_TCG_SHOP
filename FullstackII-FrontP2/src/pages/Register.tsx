@@ -1,5 +1,7 @@
 // src/pages/Register.tsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import authService from "../services/AuthService";
 import "../styles/register_style.css";
 
 export default function Register() {
@@ -15,6 +17,9 @@ export default function Register() {
     password: "",
     confirmar: "",
   });
+  const [serverError, setServerError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validateNombre = (nombre: string) => {
     if (/\d/.test(nombre)) {
@@ -39,16 +44,16 @@ export default function Register() {
       return "La contraseña debe tener al menos 8 caracteres";
     }
     if (!/[A-Z]/.test(password)) {
-      return "Debe tener al menos una mayúscula";
+      return "La contraseña debe contener al menos una mayúscula";
     }
     if (!/[a-z]/.test(password)) {
-      return "Debe tener al menos una minúscula";
+      return "La contraseña debe contener al menos una minúscula";
     }
-    if (!/[0-9]/.test(password)) {
-      return "Debe tener al menos un número";
+    if (!/\d/.test(password)) {
+      return "La contraseña debe contener al menos un número";
     }
-    if (!/[^A-Za-z0-9]/.test(password)) {
-      return "Debe tener al menos un signo o símbolo";
+    if (!/[!@#$%^&*()_+\-=\[\]{};:'",.<>?/\\|`~]/.test(password)) {
+      return "La contraseña debe contener al menos un signo especial";
     }
     return "";
   };
@@ -80,8 +85,9 @@ export default function Register() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setServerError("");
 
     const nombreError = validateNombre(formData.nombre);
     const correoError = validateCorreo(formData.correo);
@@ -90,18 +96,42 @@ export default function Register() {
       formData.confirmar,
       formData.password
     );
+
     setErrors({
       nombre: nombreError,
       correo: correoError,
       password: passwordError,
       confirmar: confirmarError,
     });
+
     if (nombreError || correoError || passwordError || confirmarError) {
       return;
     }
 
-    console.log("Solicitud de registro:", formData);
-    alert("Solicitud enviada (simulación)");
+    setLoading(true);
+
+    try {
+      const response = await authService.register({
+        nombreCompleto: formData.nombre,
+        correoElectronico: formData.correo,
+        password: formData.password,
+        confirmarPassword: formData.confirmar,
+      });
+
+      console.log("Registro exitoso:", response);
+      alert(`¡Registro exitoso! Bienvenido ${response.nombreCompleto}`);
+
+      if (response.role === "ADMIN") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+    } catch (err: any) {
+      console.error("Error en registro:", err);
+      setServerError(err.message || "Error al registrar usuario");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -109,24 +139,20 @@ export default function Register() {
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Crear Cuenta</h2>
 
-        <label htmlFor="nombre">Nombre</label>
+        {serverError && <div className="server-error-box">{serverError}</div>}
+
+        <label htmlFor="nombre">Nombre Completo</label>
         <input
           id="nombre"
           name="nombre"
           type="text"
           value={formData.nombre}
           onChange={handleChange}
-          placeholder="Tu nombre"
+          placeholder="Tu nombre completo"
           required
+          disabled={loading}
         />
-        {errors.nombre && (
-          <div
-            className="register-error"
-            style={{ color: "red", marginBottom: 10 }}
-          >
-            {errors.nombre}
-          </div>
-        )}
+        {errors.nombre && <div className="register-error">{errors.nombre}</div>}
 
         <label htmlFor="correo">Correo electrónico</label>
         <input
@@ -137,15 +163,9 @@ export default function Register() {
           onChange={handleChange}
           placeholder="ejemplo@correo.com"
           required
+          disabled={loading}
         />
-        {errors.correo && (
-          <div
-            className="register-error"
-            style={{ color: "red", marginBottom: 10 }}
-          >
-            {errors.correo}
-          </div>
-        )}
+        {errors.correo && <div className="register-error">{errors.correo}</div>}
 
         <label htmlFor="password">Contraseña</label>
         <input
@@ -156,14 +176,10 @@ export default function Register() {
           onChange={handleChange}
           placeholder="********"
           required
+          disabled={loading}
         />
         {errors.password && (
-          <div
-            className="register-error"
-            style={{ color: "red", marginBottom: 10 }}
-          >
-            {errors.password}
-          </div>
+          <div className="register-error">{errors.password}</div>
         )}
 
         <label htmlFor="confirmar">Confirmar Contraseña</label>
@@ -175,17 +191,15 @@ export default function Register() {
           onChange={handleChange}
           placeholder="********"
           required
+          disabled={loading}
         />
         {errors.confirmar && (
-          <div
-            className="register-error"
-            style={{ color: "red", marginBottom: 10 }}
-          >
-            {errors.confirmar}
-          </div>
+          <div className="register-error">{errors.confirmar}</div>
         )}
 
-        <button type="submit">Registrarse</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Registrando..." : "Registrarse"}
+        </button>
       </form>
     </div>
   );

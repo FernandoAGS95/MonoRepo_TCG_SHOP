@@ -221,8 +221,8 @@ nav.solid .logo {
 /* Imagen con tamaño fijo para que no rompa el layout */
 .card-img {
   width: 100%;
-  height: 260px;      /* mismo alto para todos */
-  object-fit: cover;  /* o "contain" si quieres ver la imagen completa */
+  height: 260px; /* mismo alto para todos */
+  object-fit: cover; /* o "contain" si quieres ver la imagen completa */
   border-radius: 8px;
 }
 
@@ -713,5 +713,71 @@ a {
   }
   .hamburger.scrolled span {
     background: #fff; /* 👈 ahora blanco */
+  }
+}
+
+/* Agregar estos estilos al final de tu archivo navbar_style.css existente */
+
+/* Estilos para usuario autenticado en navbar */
+.user-name {
+  color: #122c34;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.user-name.scrolled {
+  color: white;
+}
+
+/* Botón de logout en navbar */
+.logout-button {
+  background: none;
+  border: none;
+  color: #122c34;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  font-family: inherit;
+}
+
+.logout-button:hover {
+  color: #8f95d3;
+  background: none;
+  font-weight: inherit;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.logout-button.scrolled {
+  color: white;
+}
+
+.logout-button.scrolled:hover {
+  color: #8f95d3;
+}
+
+/* Ajustes para menú móvil */
+@media (max-width: 900px) {
+  .user-name {
+    color: white;
+    display: block;
+    padding: 16px 24px;
+    border-bottom: 1px solid #8f95d3;
+  }
+
+  .logout-button {
+    color: white;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 16px 24px;
+    border-bottom: 1px solid #8f95d3;
+  }
+
+  .logout-button:hover {
+    color: #8f95d3;
+    background: none;
   }
 }

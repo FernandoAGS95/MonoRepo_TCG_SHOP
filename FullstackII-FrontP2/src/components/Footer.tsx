@@ -1,15 +1,19 @@
+import { NavLink } from "react-router-dom";
 import "../styles/navbar_style.css";
-
 export default function Footer() {
   return (
     <footer>
       <div className="footer-container">
         <div className="footer-links">
           <ul>
-            <li>Inicio</li>
+            <li>
+              <NavLink to="/">Inicio</NavLink>
+            </li>
             <li>Preguntas frecuentes</li>
             <li>Ubicación</li>
-            <li>Contacto</li>
+            <li>
+              <NavLink to="/contacto">Contacto</NavLink>
+            </li>
           </ul>
         </div>
         <div className="footer-logo">
