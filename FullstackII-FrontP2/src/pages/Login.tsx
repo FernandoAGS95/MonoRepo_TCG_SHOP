@@ -20,6 +20,8 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+      console.log("➡️ handleSubmit ejecutado, datos:", { email, password }); // 👈 agrega esto
+
     setError("");
     setEmailError("");
 

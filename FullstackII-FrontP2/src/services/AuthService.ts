@@ -1,5 +1,6 @@
 // src/services/authService.ts
-import { API_BASE_URL } from "../config/api";
+import { API_USERS_URL } from "../config/api";
+
 
 export interface RegisterData {
   nombreCompleto: string;
@@ -33,7 +34,7 @@ class AuthService {
   // Registrar nuevo usuario
   async register(data: RegisterData): Promise<AuthResponse> {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+      const response = await fetch(`${API_USERS_URL }/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +59,7 @@ class AuthService {
   // Iniciar sesión
   async login(data: LoginData): Promise<AuthResponse> {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      const response = await fetch(`${API_USERS_URL }/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
