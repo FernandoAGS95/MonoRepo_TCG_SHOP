@@ -72,6 +72,9 @@ public class AuthService {
         log.info("Intento de login para el correo: {}", request.getCorreoElectronico());
         
         try {
+            System.out.println("TEST_ENCODER_MATCH: " +
+    passwordEncoder.matches("admin", "$2a$10$H8Ld9ugG7DtP.diRDfieFeVZrpT7lWc4u48ZCkDTIA6CfdcEQQAJu"));
+
             authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                     request.getCorreoElectronico(),
