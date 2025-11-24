@@ -52,7 +52,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             
             if (jwtUtil.validateToken(jwt, userDetails)) {
                 log.debug("Token válido. Estableciendo autenticación para: {}", username);
-                log.debug("Token válido. Estableciendo autenticación para: {}", username);
                 
                 UsernamePasswordAuthenticationToken authToken = 
                     new UsernamePasswordAuthenticationToken(

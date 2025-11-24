@@ -3,6 +3,7 @@ WORKDIR /app
 
 COPY pom.xml .
 COPY src ./src
+COPY src/main/resources/application.properties ./src/main/resources/application.properties
 
 RUN mvn -B package -DskipTests
 
