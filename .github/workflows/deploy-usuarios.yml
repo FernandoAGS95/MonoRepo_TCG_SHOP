@@ -18,7 +18,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.BACK_HOST_USUARIOS }}
-          username: ${{ secrets.BACK_USER_USUARIOS }}
+          username: ${{ secrets.BACK_USER }}
           key: ${{ secrets.BACK_SSH_KEY_USUARIOS }}
           script: |
             echo "[USUARIOS] 🚀 Iniciando deploy microservicio usuarios"
