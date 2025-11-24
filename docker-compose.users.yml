@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  usuarios:
+    build:
+      context: ./tcg-usuarios
+      dockerfile: Dockerfile
+    container_name: tcgshop-usuarios
+    restart: unless-stopped
+    ports:
+      - "8082:8082"
+    environment:
+      SERVER_PORT: 8082
+
+      DB_URL: "jdbc:mysql://172.31.28.221:3306/tcg_usuarios?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+      DB_USERNAME: "tcguser"
+      DB_PASSWORD: "TcgPass123!"
+
+      JWT_SECRET: "ClaveSecreta123"
+      JWT_EXPIRATION: 86400000
+
+      CORS_ALLOWED_ORIGINS: "*"

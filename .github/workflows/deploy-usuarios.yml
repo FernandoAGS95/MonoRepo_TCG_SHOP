@@ -1,0 +1,29 @@
+name: Deploy Usuarios
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "tcg-usuarios/**"
+
+jobs:
+  deploy-usuarios:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo (not used but required)
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 USERS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.BACK_HOST_USUARIOS }}
+          username: ${{ secrets.BACK_USER_USUARIOS }}
+          key: ${{ secrets.BACK_SSH_KEY_USUARIOS }}
+          script: |
+            echo "[USUARIOS] 🚀 Iniciando deploy microservicio usuarios"
+            cd MonoRepo_TCG_SHOP
+            git pull origin main
+            docker compose -f docker-compose.users.yml up -d --build
+            docker system prune -f
+            echo "[USUARIOS] ✅ Deploy usuarios completado"
