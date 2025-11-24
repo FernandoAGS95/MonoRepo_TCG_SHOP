@@ -100,6 +100,7 @@ public class AuthService {
                     .build();
                     
         } catch (Exception e) {
+            e.printStackTrace();
             log.error("Error en login para el correo: {}", request.getCorreoElectronico(), e);
             throw new RuntimeException("Credenciales incorrectas");
         }
