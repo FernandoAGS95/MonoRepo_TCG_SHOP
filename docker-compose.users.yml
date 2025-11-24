@@ -13,7 +13,7 @@ services:
       SERVER_PORT: 8082
       SPRING_APP_NAME: tcg_usuarios
 
-      DB_URL: "jdbc:mysql://172.31.28.221:3306/tcg_usuarios?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+      DB_URL: "jdbc:mysql://172.31.24.157:3306/tcg_usuarios?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
       DB_USERNAME: "tcguser"
       DB_PASSWORD: "TcgPass123!"
       DB_DRIVER: "com.mysql.cj.jdbc.Driver"
