@@ -16,7 +16,7 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:mysql://172.31.24.157:3306/tcg_usuarios?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
       SPRING_DATASOURCE_USERNAME: "tcguser"
       SPRING_DATASOURCE_PASSWORD: "TcgPass123!"
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: "org.mariadb.jdbc.Driver"
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: "com.mysql.cj.jdbc.Driver"
 
       SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
       SPRING_JPA_SHOW_SQL: "false"
