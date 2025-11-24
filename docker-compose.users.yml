@@ -25,4 +25,4 @@ services:
 
       JWT_SECRET: "+jgDADwc74Z3Tl5uIyZTyZMBmA757L+lLir+22hRLTimLxfxL35+8LQbBDs9U0cMUJO5qQz0N2u80pT8Tf3oYQ=="
       JWT_EXPIRATION: 86400000
-      CORS_ALLOWED_ORIGINS: "*"
+      CORS_ALLOWED_ORIGINS: "http://100.26.169.198,http://13.219.43.161,http://localhost:5173,http://localhost:3000"
