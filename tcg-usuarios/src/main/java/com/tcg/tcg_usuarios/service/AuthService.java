@@ -70,7 +70,6 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         log.info("Intento de login para el correo: {}", request.getCorreoElectronico());
-         log.info("Intento de login para el correo: {}", request.getCorreoElectronico());
 
         
         try {
