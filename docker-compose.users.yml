@@ -11,22 +11,18 @@ services:
       - "8082:8082"
     environment:
       SERVER_PORT: 8082
-      SPRING_APP_NAME: tcg_usuarios
+      SPRING_APPLICATION_NAME: tcg_usuarios
 
-      DB_URL: "jdbc:mysql://172.31.24.157:3306/tcg_usuarios?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
-      DB_USERNAME: "tcguser"
-      DB_PASSWORD: "TcgPass123!"
-      DB_DRIVER: "com.mysql.cj.jdbc.Driver"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://172.31.24.157:3306/tcg_usuarios?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+      SPRING_DATASOURCE_USERNAME: "tcguser"
+      SPRING_DATASOURCE_PASSWORD: "TcgPass123!"
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: "org.mariadb.jdbc.Driver"
 
-      JPA_DDL_AUTO: "update"
-      JPA_SHOW_SQL: "false"
-      JPA_DIALECT: "org.hibernate.dialect.MySQL8Dialect"
-      JPA_FORMAT_SQL: "false"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      SPRING_JPA_SHOW_SQL: "false"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: "org.hibernate.dialect.MySQL8Dialect"
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "false"
 
       JWT_SECRET: "ClaveSecreta123"
       JWT_EXPIRATION: 86400000
-
       CORS_ALLOWED_ORIGINS: "*"
-
-      SERVER_ERROR_INCLUDE_MESSAGE: "always"
-      SERVER_ERROR_INCLUDE_STACKTRACE: "never"
